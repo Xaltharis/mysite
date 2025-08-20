@@ -1,0 +1,301 @@
+/* Базовая сброска и переменные */
+:root {
+  --primary-blue: #4361ee;
+  --dark-blue: #3f37c9;
+  --light-blue: #4895ef;
+  --pure-white: #ffffff;
+  --dark-bg: #212529;
+  --text-dark: #2b2d42;
+  --text-light: #f8f9fa;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--pure-white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Основная сетка */
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Шапка */
+.site-header {
+  background: var(--pure-white);
+  box-shadow: var(--box-shadow);
+  padding: 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--primary-blue);
+}
+
+/* Главное меню */
+.main-nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.main-nav li {
+  position: relative;
+}
+
+.main-nav a {
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: var(--primary-blue);
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-blue);
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
+/* Контентная область */
+.main-content {
+  flex: 1;
+  padding: 50px 0;
+}
+
+/* Подвал */
+.site-footer {
+  background: var(--dark-bg);
+  color: var(--text-light);
+  padding: 50px 0 25px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 30px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--pure-white);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+}
+
+/* Дополнительные элементы */
+.btn {
+  display: inline-block;
+  background: var(--primary-blue);
+  color: white;
+  padding: 12px 28px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--box-shadow);
+}
+
+.btn:hover {
+  background: var(--dark-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(67, 97, 238, 0.3);
+}
+
+/* Секция с фильмами */
+.movies-section {
+  padding: 60px 0;
+  background: #f5f7fa;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-blue);
+}
+
+.view-all {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--primary-blue);
+  transition: var(--transition);
+}
+
+.view-all i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.view-all:hover {
+  color: var(--dark-blue);
+}
+
+.view-all:hover i {
+  transform: translateX(3px);
+}
+
+/* Сетка фильмов */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Карточка фильма */
+.movie-card {
+  background: var(--pure-white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.movie-poster {
+  height: 180px;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.poster-placeholder {
+  color: var(--gray-color);
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+.movie-info {
+  padding: 20px;
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+.movie-genre {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--pure-white);
+  background: var(--primary-blue);
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.movie-desc {
+  font-size: 0.95rem;
+  color: var(--gray-color);
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-details {
+  display: inline-block;
+  font-weight: 500;
+  color: var(--primary-blue);
+  padding: 8px 0;
+  position: relative;
+}
+
+.btn-details::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-blue);
+  transition: width 0.3s ease;
+}
+
+.btn-details:hover::after {
+  width: 100%;
+}
