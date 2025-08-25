@@ -1,301 +1,364 @@
-/* Базовая сброска и переменные */
-:root {
-  --primary-blue: #4361ee;
-  --dark-blue: #3f37c9;
-  --light-blue: #4895ef;
-  --pure-white: #ffffff;
-  --dark-bg: #212529;
-  --text-dark: #2b2d42;
-  --text-light: #f8f9fa;
-  --border-radius: 8px;
-  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  color: var(--text-dark);
-  background: var(--pure-white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Основная сетка */
-.container {
-  width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Шапка */
-.site-header {
-  background: var(--pure-white);
-  box-shadow: var(--box-shadow);
-  padding: 18px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.logo span {
-  color: var(--primary-blue);
-}
-
-/* Главное меню */
-.main-nav ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-}
-
-.main-nav li {
-  position: relative;
-}
-
-.main-nav a {
-  font-weight: 500;
-  font-size: 1.1rem;
-  padding-bottom: 5px;
-  transition: color 0.3s ease;
-}
-
-.main-nav a:hover {
-  color: var(--primary-blue);
-}
-
-.main-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-blue);
-  transition: width 0.3s ease;
-}
-
-.main-nav a:hover::after {
-  width: 100%;
-}
-
-/* Контентная область */
-.main-content {
-  flex: 1;
-  padding: 50px 0;
-}
-
-/* Подвал */
-.site-footer {
-  background: var(--dark-bg);
-  color: var(--text-light);
-  padding: 50px 0 25px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-bottom: 40px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 30px;
-}
-
-.footer-links a {
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--pure-white);
-}
-
-.copyright {
-  text-align: center;
-  padding-top: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.95rem;
-}
-
-/* Дополнительные элементы */
-.btn {
-  display: inline-block;
-  background: var(--primary-blue);
-  color: white;
-  padding: 12px 28px;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: var(--box-shadow);
-}
-
-.btn:hover {
-  background: var(--dark-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(67, 97, 238, 0.3);
-}
-
-/* Секция с фильмами */
-.movies-section {
-  padding: 60px 0;
-  background: #f5f7fa;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--primary-blue);
-}
-
-.view-all {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  color: var(--primary-blue);
-  transition: var(--transition);
-}
-
-.view-all i {
-  font-size: 0.8rem;
-  transition: transform 0.3s ease;
-}
-
-.view-all:hover {
-  color: var(--dark-blue);
-}
-
-.view-all:hover i {
-  transform: translateX(3px);
-}
-
-/* Сетка фильмов */
-.movies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-/* Карточка фильма */
-.movie-card {
-  background: var(--pure-white);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-}
-
-.movie-poster {
-  height: 180px;
-  background: #e9ecef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.poster-placeholder {
-  color: var(--gray-color);
-  font-size: 3rem;
-  opacity: 0.3;
-}
-
-.movie-info {
-  padding: 20px;
-}
-
-.movie-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--text-dark);
-}
-
-.movie-genre {
-  display: inline-block;
-  font-size: 0.85rem;
-  color: var(--pure-white);
-  background: var(--primary-blue);
-  padding: 3px 10px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.movie-desc {
-  font-size: 0.95rem;
-  color: var(--gray-color);
-  margin-bottom: 20px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.btn-details {
-  display: inline-block;
-  font-weight: 500;
-  color: var(--primary-blue);
-  padding: 8px 0;
-  position: relative;
-}
-
-.btn-details::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-blue);
-  transition: width 0.3s ease;
-}
-
-.btn-details:hover::after {
-  width: 100%;
-}
+/* Базовые стили */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #334155;
+            --light: #f8fafc;
+            --text: #e2e8f0;
+            --text-secondary: #cbd5e1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary);
+        }
+        
+        /* Шапка сайта */
+        .site-header {
+            background-color: var(--dark-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .main-nav a {
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 40px 0;
+        }
+        
+        /* Секция с фильмами */
+        .movies-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .view-all {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .view-all:hover {
+            gap: 12px;
+        }
+        
+        /* Сетка фильмов */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .movie-card {
+            background: var(--dark-light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-poster {
+            height: 380px;
+            background: linear-gradient(45deg, var(--gray), var(--dark-light));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poster-placeholder {
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .movie-info {
+            padding: 20px;
+        }
+        
+        .movie-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .movie-genre {
+            display: block;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .movie-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .btn-details {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-details:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+        
+        /* Детальная страница фильма */
+        .movie-detail-card {
+            display: flex;
+            background: var(--dark-light);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-detail-poster {
+            flex: 0 0 380px;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .movie-detail-poster .poster {
+            width: 100%;
+            max-width: 300px;
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .movie-detail-info {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .movie-detail-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .movie-detail-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 120px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .movie-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .movie-meta span {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .movie-genres {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .movie-genre {
+            background: var(--primary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .movie-detail-desc {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .movie-director {
+            margin-bottom: 20px;
+        }
+        
+        .movie-director h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .movie-director a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        /* Подвал сайта */
+        .site-footer {
+            background-color: var(--dark-light);
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
