@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render, get_object_or_404
 
-from .models import Movie, Director
+from .models import Movie, Director, Genre
 
 menu = [
     {'title': 'Главная', 'url_name': 'home'},
@@ -11,9 +11,12 @@ menu = [
 
 def index(request):
     movies = Movie.objects.all()
+    genres = Genre.objects.all()
+
     param = {
         'menu': menu,
         'movies': movies,
+        'genres': genres,
         'title': 'Главная страница'
     }
     return render(request, 'movies/index.html', context=param)
@@ -46,6 +49,17 @@ def show_movie(request, post_id):
 
 def show_director(request, director_id):
     return HttpResponse(f'Страница режиссёра с ID = {director_id}')
+
+def movie_by_genre(request, genre_id):
+    genre = get_object_or_404(Genre, pk=genre_id)
+    movies = Movie.objects.filter(genres=genre)
+
+    param = {
+        'menu': menu,
+        'movies': movies,
+        'title': f'Фильмы в жанре: {genre.name}'
+    }
+    return render(request, 'movies/movies_by_category.html', context=param)
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('Страница не найдена')

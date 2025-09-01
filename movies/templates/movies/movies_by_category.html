@@ -3,7 +3,7 @@
 {% block content %}
 <section class="movies-section">
     <div class="section-header container">
-        <h2 class="section-title">Фильмы</h2>
+        <h2 class="section-title">{{ title }}</h2>
         <a href="/" class="view-all">Смотреть все <i class="fas fa-chevron-right"></i></a>
     </div>
 
@@ -17,6 +17,7 @@
             </div>
             <div class="movie-info">
                 <h3 class="movie-title">{{ movie.title }}</h3>
+
                 <span class="movie-genre">
                     {% for genre in movie.genres.all %}
                         {{ genre.name }}{% if not forloop.last %}, {% endif %}
@@ -27,21 +28,6 @@
                 <a href="{{ movie.get_absolute_url }}" class="btn-details">Подробнее</a>
             </div>
         </div>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="genres-section">
-  <div class="section-header container">
-        <h2 class="section-title">Жанры</h2>
-        <a href="/" class="view-all">Смотреть все <i class="fas fa-chevron-right"></i></a>
-    </div>
-    
-    <div class="genres-grid container">
-        {% for genre in genres %}
-        <a href="{% url 'genre' genre.id %}" class="genre-card">
-            <h3 class="genre-title">{{ genre.name }}</h3>
-        </a>
         {% endfor %}
     </div>
 </section>
