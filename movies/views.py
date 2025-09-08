@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Movie, Director, Genre
 
@@ -7,6 +8,7 @@ menu = [
     {'title': 'Главная', 'url_name': 'home'},
     {'title': 'О сайте', 'url_name': 'about'},
     {'title': 'Добавить фильм', 'url_name': 'add_movie'},
+    {'title': 'Регистрация', 'url_name': 'register'},
 ]
 
 def index(request):
@@ -60,6 +62,22 @@ def movie_by_genre(request, genre_id):
         'title': f'Фильмы в жанре: {genre.name}'
     }
     return render(request, 'movies/movies_by_category.html', context=param)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+
+    param = {
+        'menu': menu,
+        'title': 'Регистрация',
+        'form': form
+    }
+    return render(request, 'movies/register.html', context=param)
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('Страница не найдена')

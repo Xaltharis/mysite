@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/<int:post_id>/', show_movie, name='post'),
     path('director/<int:director_id>/', show_director, name='director'),
     path('genre/<int:genre_id>/', movie_by_genre, name='genre'),
+    path('register/', register, name='register'),
 ]
