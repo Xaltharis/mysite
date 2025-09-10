@@ -1,4 +1,5 @@
 from django.urls import path, re_path
+from django.contrib.auth.views import LogoutView
 
 from .views import *
 
@@ -10,4 +11,6 @@ urlpatterns = [
     path('director/<int:director_id>/', show_director, name='director'),
     path('genre/<int:genre_id>/', movie_by_genre, name='genre'),
     path('register/', register, name='register'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
 ]
