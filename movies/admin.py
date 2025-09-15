@@ -27,8 +27,24 @@ class MovieAdmin(admin.ModelAdmin):
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name', 'description')
+
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('name', 'description')
+        }),
+    )
 
 @admin.register(Director)
 class DirectorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'first_name', 'last_name')
+    search_fields = ('first_name', 'last_name')
+
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('first_name', 'last_name', 'birth_date')
+        }),
+        ('Биография и фото', {
+            'fields': ('biography', 'photo')
+        }),
+    )
