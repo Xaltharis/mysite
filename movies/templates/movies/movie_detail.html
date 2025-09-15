@@ -29,9 +29,11 @@
             {% if movie.director %}
             <div class="movie-director">
                 <h4>Режиссер:</h4>
-                <p>
-                    <a href="#">{{ movie.director.first_name }} {{ movie.director.last_name }}</a>
-                </p>
+                    <p>
+                        <a href="{% url 'director' movie.director.id %}">
+                            {{ movie.director.first_name }} {{ movie.director.last_name }}
+                         </a>
+                    </p>
             </div>
             {% endif %}
         </div>

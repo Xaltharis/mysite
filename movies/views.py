@@ -57,7 +57,15 @@ def show_movie(request, post_id):
     return render(request, 'movies/movie_detail.html', context=param)
 
 def show_director(request, director_id):
-    return HttpResponse(f'Страница режиссёра с ID = {director_id}')
+    director = get_object_or_404(Director, pk=director_id)
+    
+    param = {
+        'menu': menu,
+        'title': f'{director.first_name} {director.last_name}',
+        'director': director,
+    }
+
+    return render(request, 'movies/director_detail.html', context=param)
 
 def movie_by_genre(request, genre_id):
     genre = get_object_or_404(Genre, pk=genre_id)

@@ -1,0 +1,55 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="director-detail-card">
+        <div class="director-photo">
+            {% if director.photo %}
+                <img src="{{ director.photo.url }}" alt="{{ director.first_name }} {{ director.last_name }}">
+            {% else %}
+                <div class="photo-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="director-info">
+            <h1 class="director-name">{{ director.first_name }} {{ director.last_name }}</h1>
+
+            <div class="director-meta">
+                {% if director.birth_date %}
+                    <span>Дата рождения: {{ director.birth_date }}</span>
+                {% endif %}
+                {% if director.country %}
+                    <span>Страна: {{ director.country }}</span>
+                {% endif %}
+            </div>
+
+            {% if director.biography %}
+                <div class="director-biography">
+                    <h3>Биография</h3>
+                    <p>{{ director.biography }}</p>
+                </div>
+            {% endif %}
+
+            <div class="director-movies">
+                <h3>Фильмография</h3>
+                <div class="movies-list">
+                    {% for movie in director.directed_movies.all %}
+                        <div class="movie-item">
+                            <a href="{% url 'post' movie.id %}">{{ movie.title }}</a> 
+                            ({{ movie.release_year }})
+                            {% if movie.rating %}
+                                <span class="movie-rating">★ {{ movie.rating }}</span>
+                            {% endif %}
+                        </div>
+                    {% empty %}
+                        <p>Нет информации о фильмах этого режиссера.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
