@@ -21,11 +21,13 @@ def logout_user(request):
 def index(request):
     movies = Movie.objects.order_by('-time_create').select_related('director').all()[:3]
     genres = Genre.objects.all()
+    directors = Director.objects.all()[:6]
 
     param = {
         'menu': menu,
         'movies': movies,
         'genres': genres,
+        'directors': directors,
         'title': 'Главная страница'
     }
     return render(request, 'movies/index.html', context=param)
@@ -66,6 +68,18 @@ def show_director(request, director_id):
     }
 
     return render(request, 'movies/director_detail.html', context=param)
+
+def movie_by_director(request, director_id):
+    director = get_object_or_404(Director, pk=director_id)
+    movies = Movie.objects.filter(director=director)
+    
+    param = {
+        'menu': menu,
+        'movies': movies,
+        'director': director,
+        'title': f'Фильмы режиссера: {director.first_name} {director.last_name}'
+    }
+    return render(request, 'movies/movies_by_director.html', context=param)
 
 def movie_by_genre(request, genre_id):
     genre = get_object_or_404(Genre, pk=genre_id)

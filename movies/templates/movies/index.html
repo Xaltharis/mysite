@@ -45,4 +45,28 @@
         {% endfor %}
     </div>
 </section>
+
+<section class="directors-section">
+    <div class="section-header container">
+        <h2 class="section-title">Режиссёры</h2>
+        <a href="/" class="view-all">Смотреть всех <i class="fas fa-chevron-right"></i></a>
+    </div>
+    
+    <div class="directors-grid container">
+        {% for director in directors %}
+        <a href="{% url 'movies_by_director' director.id %}" class="director-card">
+            <div class="director-photo">
+                {% if director.photo %}
+                    <img src="{{ director.photo.url }}" alt="{{ director.first_name }} {{ director.last_name }}">
+                {% else %}
+                    <div class="photo-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <h3 class="director-title">{{ director.first_name }} {{ director.last_name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</section>
 {% endblock content %}
