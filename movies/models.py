@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from django.contrib.auth.models import User
+
 class Genre(models.Model):
     name = models.CharField(max_length=50, unique=True, null=False)
     description = models.TextField(blank=True, null=True)
@@ -49,3 +51,15 @@ class Movie(models.Model):
     def get_absolute_url(self):
         return reverse('post', kwargs={'post_id': self.pk})
     
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='Фильм')
+    watched_on = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+
+    class Meta:
+        unique_together = ('user', 'movie')
+        verbose_name = 'Список просмотренного'
+        verbose_name_plural = 'Списки просмотренного'
+
+    def __str__(self):
+        return f'{self.user.username} - {self.movie.title}'

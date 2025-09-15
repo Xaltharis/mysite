@@ -2,8 +2,9 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import login, logout
 from .forms import CustomUserCreationForm, CustomAuthentificationForm
+from django.contrib.auth.decorators import login_required
 
-from .models import Movie, Director, Genre
+from .models import Movie, Director, Genre, Watchlist
 
 menu = [
     {'title': 'Главная', 'url_name': 'home'},
@@ -124,6 +125,22 @@ def login_user(request):
         'form': form
     }
     return render(request, 'movies/login.html', context=param)
+
+@login_required
+def add_to_watchlist(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    Watchlist.objects.get_or_create(user=request.user, movie=movie)
+    return redirect('post', post_id=movie_id)
+
+@login_required
+def profile(request):
+    watchlist = Watchlist.objects.filter(user=request.user).select_related('movie')
+
+    param = {
+        'title': f'Профиль: {request.user.username}',
+        'watchlist': watchlist
+    }
+    return render(request, 'movies/profile.html', context=param)
     
 def pageNotFound(request, exception):
     return HttpResponseNotFound('Страница не найдена')
