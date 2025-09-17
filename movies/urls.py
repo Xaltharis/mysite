@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='home' ),
+    path('movies/', all_movies, name='all_movies'),
     path('about/', about, name='about'),
     path('addmovie/', add_movie, name='add_movie'),
     path('post/<int:post_id>/', show_movie, name='post'),

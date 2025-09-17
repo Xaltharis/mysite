@@ -33,6 +33,16 @@ def index(request):
     }
     return render(request, 'movies/index.html', context=param)
 
+def all_movies(request):
+    movies = Movie.objects.order_by('-time_create').select_related('director').all()
+
+    param = {
+        'title': 'Все фильмы',
+        'movies': movies,
+    }
+
+    return render(request, 'movies/movie_list.html', context=param)
+
 def about(request):
     movie_count = Movie.objects.filter(is_published=True).count()
     director_count = Director.objects.count()
